@@ -118,31 +118,45 @@ public class HelloFunctional {
 }
 
 ## Hasil Eksekusi
-(Sertakan screenshot hasil eksekusi program.  
-![Screenshot hasil](screenshots/hasil.png)
-)
----
+praktikum/week1-setup-hello-pos/screenshots/HelloFuctional.png
+praktikum/week1-setup-hello-pos/screenshots/HelloOOP.png
+praktikum/week1-setup-hello-pos/screenshots/HelloProcedural.png
 
 ## Analisis
-(
-- Jelaskan bagaimana kode berjalan.  
-- Apa perbedaan pendekatan minggu ini dibanding minggu sebelumnya.  
-- Kendala yang dihadapi dan cara mengatasinya.  
-)
----
+1. HelloProcedural.java
+program ini dibuat dengan pemrograman procedural yang dieksekusi berurutan dalam satu fungsi utama. Program ini menggunakan variable, array, dan perulangan untuk menampilkan daftar produk, harga dan menghitung totalnya
+
+2. HelloOOP.java
+Program ini membuat kelas Produk yang memiliki atribut (nama, harga) dan konstruktor untuk inisialisasi data.
+Dalam main, objek-objek Produk dibuat dan disimpan dalam array, lalu datanya ditampilkan melalui iterasi.
+
+3. HelloFunctional.java
+Program menggunakan pemrograman fungsional, yang menekankan penggunaan fungsi murni, stream, dan operasi deklaratif.
+Program ini memanfaatkan IntStream dan stream() untuk mengelola dan menghitung data secara lebih ringkas dan ekspresif.
+
 
 ## Kesimpulan
-(Tuliskan kesimpulan dari praktikum minggu ini.  
-Contoh: *Dengan menggunakan class dan object, program menjadi lebih terstruktur dan mudah dikembangkan.*)
-
+Paradigma prosedural cocok untuk program sederhana,
+OOP cocok untuk aplikasi besar dan kompleks,
+Fungsional cocok untuk pemrosesan data modern yang efisien dan bersih.
 ---
 
 ## Quiz
-(1. [Tuliskan kembali pertanyaan 1 dari panduan]  
-   **Jawaban:** …  
+1. Apakah OOP selalu lebih baik dari prosedural? 
+   **Jawaban:** Tidak selalu. OOP lebih baik digunakan untuk program besar dan kompleks karena menyediakan struktur modular dan reusabilitas kode melalui kelas dan objek.
+Namun, untuk program kecil dan sederhana, paradigma prosedural bisa lebih cepat dikembangkan dan mudah dipahami, karena tidak memerlukan struktur kelas yang kompleks.
 
-2. [Tuliskan kembali pertanyaan 2 dari panduan]  
-   **Jawaban:** …  
+2. Kapan functional programming lebih cocok digunakan dibanding OOP atau prosedural?  
+   **Jawaban:** Functional programming lebih cocok ketika program berfokus pada pengolahan data, seperti filtering, mapping, dan agregasi. Dibutuhkan kode ringkas dan deklaratif, misalnya pada analisis data, stream processing, atau program reaktif. Menghindari perubahan state dan efek samping penting, misalnya pada sistem paralel atau multithreading.
 
-3. [Tuliskan kembali pertanyaan 3 dari panduan]  
-   **Jawaban:** …  )
+3. Bagaimana paradigma memengaruhi maintainability dan scalability aplikasi?  
+   **Jawaban:** Prosedural sulit dimaintain jika program besar karena logika bercampur dalam satu fungsi yang sama dan skalabilitasnya rendah.
+OOP sangar mendukung maintainability karena kode terstruktur dalam class dan object, skalabilitas tinggi
+Fungsional kode lebih bersih dan modular, mudah diuji dan diparalelkan, cocok untuk aplikasi berskala besar yang butuh efisiensi dan konsistensi.
+
+4. Mengapa OOP lebih cocok untuk mengembangkan aplikasi POS dibanding prosedural?
+   **Jawaban:**  Aplikasi POS (Point of Sale) terdiri dari banyak entitas seperti Produk, Transaksi, Pelanggan, dan Kasir.
+Dengan OOP, setiap entitas bisa dibuat sebagai kelas dengan atribut dan method sendiri, sehingga kode lebih terorganisir, mudah dikembangkan saat fitur baru ditambah, lebih realistis dalam memodelkan dunia nyata sedangkan pendekatan prosedural akan membuat kode berulang dan sulit dikelola jika kompleksitas meningkat.
+
+5. Bagaimana paradigma fungsional dapat membantu mengurangi kode berulang (boilerplate code)? 
+   **Jawaban:** Functional programming menggunakan fungsi murni, stream, dan lambda expression yang memungkinkan operasi kompleks dilakukan dalam satu baris kode. Contohnya, operasi seperti menghitung total, filter, dan transformasi data bisa dilakukan tanpa loop eksplisit. Hal ini mengurangi boilerplate (kode perulangan dan deklarasi berulang) serta membuat kode lebih singkat, ekspresif, dan mudah dirawat.
