@@ -119,10 +119,10 @@ public class CreditBy {
 }
 
 ## Hasil Eksekusi
-(Sertakan screenshot hasil eksekusi program.  
-![Screenshot hasil](screenshots/hasil.png)
-)
----
+https://github.com/kavinareyn/oop-202501-240202909/blob/main/praktikum/week2-class-object/screenshots/creditby.png
+https://github.com/kavinareyn/oop-202501-240202909/blob/main/praktikum/week2-class-object/screenshots/example.png
+https://github.com/kavinareyn/oop-202501-240202909/blob/main/praktikum/week2-class-object/screenshots/mainproduk.png
+https://github.com/kavinareyn/oop-202501-240202909/blob/main/praktikum/week2-class-object/screenshots/produk.png
 
 ## Analisis
 1. Produk.java berfungsi sebagai blueprint (cetak biru) untuk membuat objek produk pertanian.
