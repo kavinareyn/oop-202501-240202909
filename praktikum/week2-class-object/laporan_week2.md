@@ -125,25 +125,23 @@ public class CreditBy {
 ---
 
 ## Analisis
-(
-- Jelaskan bagaimana kode berjalan.  
-- Apa perbedaan pendekatan minggu ini dibanding minggu sebelumnya.  
-- Kendala yang dihadapi dan cara mengatasinya.  
-)
+1. Produk.java berfungsi sebagai blueprint (cetak biru) untuk membuat objek produk pertanian.
+2. Mainproduk.java berisi method main() sebagai titik awal eksekusi program.
+3. CreditBy.java menampilkan identitas pembuat program.
 ---
 
 ## Kesimpulan
-(Tuliskan kesimpulan dari praktikum minggu ini.  
-Contoh: *Dengan menggunakan class dan object, program menjadi lebih terstruktur dan mudah dikembangkan.*)
+dengan class dan objek kode menjadi lebih rapi. dengan adanya enkapsulasi data menjadi lebih aman. dengan ini data jadi mudah dikembangkan.
 
 ---
 
 ## Quiz
 1. Mengapa atribut sebaiknya dideklarasikan sebagai private dalam class?  
-   **Jawaban:** …  
+   **Jawaban:** agar data tidak bisa diakses dari luar kelas secara sembarangan. data hanya bisa diakses menggunakan getter dan setter sehingga kita memiliki akses penuh terhadap data.
 
 2. Apa fungsi getter dan setter dalam enkapsulasi?  
-   **Jawaban:** …  
+   **Jawaban:** getter digunakan untuk mendapatkan informasi dari private
+   setter digunakan untuk mengubah data private dengan cara yang terkontrol
 
-3. Bagaimana cara class Produk mendukung pengembangan aplikasi POS yang lebih kompleks?  
-   **Jawaban:** …  
+4. Bagaimana cara class Produk mendukung pengembangan aplikasi POS yang lebih kompleks?  
+   **Jawaban:** Class Produk menjadi dasar penting dalam aplikasi POS karena menyediakan model data yang aman, fleksibel, dan siap dikembangkan untuk sistem yang lebih besar. 
