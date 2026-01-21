@@ -1,4 +1,4 @@
-#Laporan Praktikum Minggu 5
+<img width="1867" height="927" alt="image" src="https://github.com/user-attachments/assets/1191b55b-ca69-4850-8c7f-9336055b92dc" />#Laporan Praktikum Minggu 5
 Topik: Abstraction (Abstract Class & Interface)
 
 ## Identitas
@@ -75,6 +75,7 @@ public class Cash extends com.upb.agripos.model.pembayaran.Pembayaran implements
     }
 }
 
+
 ewallet.java
 package com.upb.agripos.model.pembayaran;
 
@@ -113,6 +114,7 @@ public class EWallet extends Pembayaran implements Validatable, Receiptable {
     }
 }
 
+
 pembayaran.java
 package com.upb.agripos.model.pembayaran;
 
@@ -144,6 +146,7 @@ public class CreditBy {
         System.out.println("\ncredit by: " + nim + " - " + nama);
     }
 }
+
 mainabstraction.java
 package com.upb.agripos;
 
@@ -166,6 +169,7 @@ public class MainAbstraction {
 ---
 
 ## Hasil Eksekusi
+
 
 ---
 
