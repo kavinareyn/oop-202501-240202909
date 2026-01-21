@@ -1,26 +1,42 @@
-# Laporan Praktikum Minggu 1 (sesuaikan minggu ke berapa?)
-Topik: [Tuliskan judul topik, misalnya "Class dan Object"]
+# Laporan Praktikum Minggu 6
+Topik: Desain Arsitektur Sistem Agri-POS Menggunakan UML & SOLID
 
 ## Identitas
-- Nama  : [Nama Mahasiswa]
-- NIM   : [NIM Mahasiswa]
-- Kelas : [Kelas]
+- Nama  : Kavina Reyna Riyadi
+- NIM   : 240202909
+- Kelas : 3IKKA
 
 ---
 
 ## Tujuan
-(Tuliskan tujuan praktikum minggu ini.  
-Contoh: *Mahasiswa memahami konsep class dan object serta dapat membuat class Produk dengan enkapsulasi.*)
+Praktikum ini bertujuan untuk:
+
+Mahasiswa mampu memetakan kebutuhan sistem menjadi diagram UML.
+Mahasiswa mampu membuat Use Case, Activity, Sequence, dan Class Diagram.
+Mahasiswa memahami dan menerapkan prinsip desain SOLID.
+Mahasiswa mampu menghubungkan kebutuhan fungsional ke desain arsitektur perangkat lunak.
 
 ---
 
 ## Dasar Teori
-(Tuliskan ringkasan teori singkat (3–5 poin) yang mendasari praktikum.  
-Contoh:  
-1. Class adalah blueprint dari objek.  
-2. Object adalah instansiasi dari class.  
-3. Enkapsulasi digunakan untuk menyembunyikan data.)
+UML adalah standar pemodelan yang digunakan untuk menggambarkan desain sistem perangkat lunak.
+Dalam praktikum ini digunakan 4 diagram:
 
+Use Case Diagram
+Activity Diagram
+Sequence Diagram
+Class Diagram
+2. Prinsip SOLID
+S — Single Responsibility Principle
+Setiap class hanya memiliki satu alasan untuk berubah.
+O — Open/Closed Principle
+Kelas terbuka untuk ekstensi, tertutup untuk modifikasi.
+L — Liskov Substitution Principle
+Subclass harus dapat menggantikan superclass tanpa mengubah perilaku.
+I — Interface Segregation Principle
+Interface harus spesifik, tidak terlalu gemuk.
+D — Dependency Inversion Principle
+High-level module harus bergantung pada abstraksi.
 ---
 
 ## Langkah Praktikum
@@ -49,25 +65,24 @@ System.out.println(p1.getNama());
 ---
 
 ## Analisis
-(
-- Jelaskan bagaimana kode berjalan.  
-- Apa perbedaan pendekatan minggu ini dibanding minggu sebelumnya.  
-- Kendala yang dihadapi dan cara mengatasinya.  
-)
+
+Program ini berhasil menerapkan abstraction dan interface dalam Java untuk membangun sistem pembayaran yang fleksibel. Dengan memisahkan kontrak, logika umum, dan implementasi spesifik, sistem menjadi mudah dikembangkan dan dipelihara.
 ---
 
 ## Kesimpulan
-(Tuliskan kesimpulan dari praktikum minggu ini.  
-Contoh: *Dengan menggunakan class dan object, program menjadi lebih terstruktur dan mudah dikembangkan.*)
+Program ini menerapkan konsep abstraction, interface, dan polymorphism pada Java untuk membangun sistem pembayaran sederhana. Abstract class Pembayaran menjadi dasar umum, sedangkan Cash dan EWallet mengimplementasikan proses pembayaran sesuai karakteristik masing-masing. Struktur program yang modular membuat sistem mudah dikembangkan dan dipelihara.
 
 ---
 
 ## Quiz
-(1. [Tuliskan kembali pertanyaan 1 dari panduan]  
-   **Jawaban:** …  
+1. Perbedaan aggregation dan composition? 
+   **Jawaban:**  Aggregation -> hubungan lemah (weak has-a). Objek bisa berdiri sendiri tanpa objek induknya. Composition hubungan kuat (strong has-a) objek bagian tidak bisa hidup tanpa objek induk.
 
-2. [Tuliskan kembali pertanyaan 2 dari panduan]  
-   **Jawaban:** …  
+2. Bagaimana prinsip Open/Closed membantu pengembangan sistem?
+   **Jawaban:** Prinsip Open/Closed membantu pengembangan sistem dengan cara membuat sistem terbuka untuk penambahan fitur, tetapi tertutup untuk perubahan kode lama.
+Artinya, fitur baru bisa ditambahkan (misalnya metode pembayaran baru) tanpa mengubah kode yang sudah ada, sehingga sistem lebih aman, fleksibel, dan mudah dikembangkan.
 
-3. [Tuliskan kembali pertanyaan 3 dari panduan]  
-   **Jawaban:** …  )
+3. Mengapa Dependency Inversion Principle meningkatkan testability? 
+   **Jawaban:** Dependency Inversion Principle (DIP) meningkatkan testability karena kelas bergantung pada abstraksi (interface/abstract class), bukan pada implementasi konkret.
+Akibatnya, saat pengujian kita bisa mengganti dependensi asli dengan mock atau dummy object, sehingga pengujian menjadi lebih mudah, terisolasi, dan tidak bergantung pada sistem nyata (seperti database atau API).
+
