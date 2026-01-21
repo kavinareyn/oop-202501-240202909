@@ -1,0 +1,43 @@
+---
+title: Agri-POS Payment Sequence Diagram
+---
+sequenceDiagram
+    participant K as Kasir
+    participant TS as TransactionService
+    participant PS as PaymentService
+    participant PM as PaymentMethod
+    participant PG as PaymentGateway
+    participant RP as ReceiptPrinter
+    
+    Note over K,RP: Skenario Normal - Pembayaran Tunai
+    K->>TS: checkout(cartItems)
+    TS->>TS: calculateTotal()
+    TS->>PS: processPayment(total, "CASH")
+    PS->>PM: createPayment("CASH")
+    PM-->>PS: CashPayment instance
+    
+    alt Cash Payment
+        PS->>PM: processPayment(amount)
+        PM-->>PS: PaymentResult(success, transactionId)
+        PS-->>TS: PaymentResult
+        TS-->>K: Transaction completed
+        TS->>RP: printReceipt(transactionId)
+        RP-->>K: Receipt printed
+    else E-Wallet Payment
+        PS->>PM: createPayment("EWALLET")
+        PM-->>PS: EWalletPayment instance
+        PS->>PM: processPayment(amount)
+        PM->>PG: validatePayment(details)
+        PG-->>PM: validation result
+        
+        alt Saldo Cukup
+            PM->>PG: executePayment(amount)
+            PG-->>PM: success, refId
+            PM-->>PS: PaymentResult(success)
+        else Saldo Tidak Cukup
+            PG-->>PM: error("Insufficient balance")
+            PM-->>PS: PaymentResult(failed, "Insufficient balance")
+            PS-->>TS: PaymentResult(failed)
+            TS-->>K: Payment failed
+        end
+    end

@@ -1,0 +1,235 @@
+---
+title: Agri-POS Class Diagram
+---
+classDiagram
+    
+    %% Domain Layer
+    class Product {
+        -String productCode
+        -String name
+        -String category
+        -double price
+        -int stock
+        -DateTime createdAt
+        -DateTime updatedAt
+        +Product()
+        +getProductCode() String
+        +setProductCode(String)
+        +getName() String
+        +setName(String)
+        +getCategory() String
+        +setCategory(String)
+        +getPrice() double
+        +setPrice(double)
+        +getStock() int
+        +setStock(int)
+        +isAvailable() boolean
+        +reduceStock(int) boolean
+    }
+    
+    class Transaction {
+        -String transactionId
+        -DateTime transactionDate
+        -double totalAmount
+        -String paymentMethod
+        -String status
+        -List~TransactionItem~ items
+        +Transaction()
+        +calculateTotal() double
+        +addItem(Product, int) void
+        +removeItem(String) boolean
+        +getTransactionId() String
+        +setStatus(String) void
+        +getItems() List~TransactionItem~
+    }
+    
+    class TransactionItem {
+        -String itemId
+        -Product product
+        -int quantity
+        -double subtotal
+        +TransactionItem()
+        +calculateSubtotal() double
+        +getProduct() Product
+        +getQuantity() int
+        +setQuantity(int) void
+    }
+    
+    class Payment {
+        <<abstract>>
+        -String paymentId
+        -double amount
+        -DateTime paymentDate
+        -String status
+        +Payment()
+        +processPayment(double) PaymentResult*
+        +validate() boolean*
+        +getPaymentId() String
+        +getStatus() String
+    }
+    
+    class PaymentResult {
+        -boolean success
+        -String transactionId
+        -String message
+        -DateTime timestamp
+        +PaymentResult()
+        +isSuccess() boolean
+        +getMessage() String
+    }
+    
+    %% Service Layer
+    class ProductService {
+        -ProductRepository productRepository
+        +ProductService(ProductRepository)
+        +addProduct(Product) Product
+        +updateProduct(String, Product) Product
+        +deleteProduct(String) boolean
+        +getProduct(String) Product
+        +getAllProducts() List~Product~
+        +searchProducts(String) List~Product~
+    }
+    
+    class TransactionService {
+        -TransactionRepository transactionRepository
+        -PaymentService paymentService
+        -ProductService productService
+        +TransactionService()
+        +createTransaction() Transaction
+        +addToCart(Transaction, String, int) boolean
+        +checkout(Transaction, String) PaymentResult
+        +getTransaction(String) Transaction
+        +getDailyReport(Date) Report
+    }
+    
+    class PaymentService {
+        -Map~String, PaymentMethod~ paymentMethods
+        +PaymentService()
+        +registerPaymentMethod(String, PaymentMethod) void
+        +processPayment(double, String) PaymentResult
+        +getAvailableMethods() List~String~
+    }
+    
+    class ReportService {
+        <<interface>>
+        +generateDailyReport(Date) Report
+        +generatePeriodicReport(Date, Date) Report
+        +exportReport(Report, String) boolean
+    }
+    
+    class ReportGenerator {
+        -TransactionRepository transactionRepository
+        +ReportGenerator()
+        +generateDailyReport(Date) Report
+        +generatePeriodicReport(Date, Date) Report
+        +exportToPDF(Report) boolean
+        +exportToExcel(Report) boolean
+    }
+    
+    %% Payment Layer
+    class PaymentMethod {
+        <<interface>>
+        +processPayment(double) PaymentResult
+        +validate() boolean
+        +getMethodName() String
+    }
+    
+    class CashPayment {
+        -double cashTendered
+        -double change
+        +CashPayment()
+        +processPayment(double) PaymentResult
+        +validate() boolean
+        +calculateChange(double) double
+        +getMethodName() String
+    }
+    
+    class EWalletPayment {
+        -String provider
+        -String accountId
+        +EWalletPayment(String, String)
+        +processPayment(double) PaymentResult
+        +validate() boolean
+        +getMethodName() String
+        +setProvider(String) void
+    }
+    
+    %% Repository Layer
+    class ProductRepository {
+        <<interface>>
+        +save(Product) Product
+        +update(Product) Product
+        +delete(String) boolean
+        +findById(String) Product
+        +findAll() List~Product~
+        +findByCategory(String) List~Product~
+    }
+    
+    class TransactionRepository {
+        <<interface>>
+        +save(Transaction) Transaction
+        +findById(String) Transaction
+        +findByDate(Date) List~Transaction~
+        +findByDateRange(Date, Date) List~Transaction~
+    }
+    
+    class InMemoryProductRepository {
+        -Map~String, Product~ products
+        +InMemoryProductRepository()
+        +save(Product) Product
+        +update(Product) Product
+        +delete(String) boolean
+        +findById(String) Product
+        +findAll() List~Product~
+        +findByCategory(String) List~Product~
+    }
+    
+    %% Utility Layer
+    class ReceiptPrinter {
+        -String template
+        +ReceiptPrinter()
+        +printReceipt(Transaction) boolean
+        +setTemplate(String) void
+        +generateReceiptHTML(Transaction) String
+    }
+    
+    class Report {
+        -String reportId
+        -Date reportDate
+        -double totalSales
+        -int transactionCount
+        -List~Transaction~ transactions
+        +Report()
+        +getReportId() String
+        +getTotalSales() double
+        +getTransactionCount() int
+        +addTransaction(Transaction) void
+    }
+    
+    %% Relationships
+    Product "1" -- "*" TransactionItem : contains
+    Transaction "1" -- "*" TransactionItem : has
+    Payment <|-- CashPayment : extends
+    Payment <|-- EWalletPayment : extends
+    PaymentMethod <|.. CashPayment : implements
+    PaymentMethod <|.. EWalletPayment : implements
+    
+    TransactionService --> ProductService : uses
+    TransactionService --> PaymentService : uses
+    TransactionService --> TransactionRepository : depends on
+    ProductService --> ProductRepository : depends on
+    
+    PaymentService --> PaymentMethod : uses
+    ReportGenerator ..|> ReportService : implements
+    
+    InMemoryProductRepository ..|> ProductRepository : implements
+    
+    TransactionService --> ReceiptPrinter : uses
+    ReportGenerator --> TransactionRepository : uses
+    
+    %% Notes for SOLID Principles
+    note for PaymentMethod "I - Interface Segregation:\nPaymentMethod hanya berisi\nmethod yang relevan"
+    note for Payment "O - Open/Closed:\nMudah menambah jenis\npembayaran baru"
+    note for PaymentService "D - Dependency Inversion:\nBergantung pada abstraksi\nPaymentMethod, bukan konkrit"
+    note for ProductService "S - Single Responsibility:\nHanya mengelola produk"
+    note for CashPayment "L - Liskov Substitution:\nDapat menggantikan Payment\nsecara aman"
