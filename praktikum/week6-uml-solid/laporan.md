@@ -40,28 +40,23 @@ High-level module harus bergantung pada abstraksi.
 ---
 
 ## Langkah Praktikum
-(Tuliskan Langkah-langkah dalam prakrikum, contoh:
-1. Langkah-langkah yang dilakukan (setup, coding, run).  
-2. File/kode yang dibuat.  
-3. Commit message yang digunakan.)
+Menganalisis kebutuhan sistem dari deskripsi awal.
+Membuat daftar aktor dan use case.
+Menggambar Use Case Diagram sebagai iterasi pertama.
+Mendesain Activity Diagram proses checkout lengkap dengan skenario gagal.
+Membuat Sequence Diagram untuk pembayaran tunai dan e-wallet.
+Mendesain Class Diagram berdasarkan relasi antar objek dan prinsip SOLID.
+Menghasilkan file diagram .png dan dokumentasinya.
+Menyusun laporan dalam format markdown.
 
 ---
 
-## Kode Program
-(Tuliskan kode utama yang dibuat, contoh:  
+## Deskripsi Singkat Sistem
+Agri-POS adalah sistem Point of Sale (POS) khusus untuk sektor pertanian yang dirancang untuk mendukung transaksi penjualan produk pertanian seperti benih, pupuk, alat, dan obat-obatan. Sistem ini memungkinkan kasir untuk melakukan transaksi dengan berbagai metode pembayaran, sementara admin dapat mengelola inventori produk dan melihat laporan penjualan. Arsitektur sistem mengadopsi prinsip SOLID untuk memastikan maintainability, extensibility, dan reusability.
 
-```java
-// Contoh
-Produk p1 = new Produk("BNH-001", "Benih Padi", 25000, 100);
-System.out.println(p1.getNama());
-```
-)
----
 
 ## Hasil Eksekusi
-(Sertakan screenshot hasil eksekusi program.  
-![Screenshot hasil](screenshots/hasil.png)
-)
+
 ---
 
 ## Analisis
