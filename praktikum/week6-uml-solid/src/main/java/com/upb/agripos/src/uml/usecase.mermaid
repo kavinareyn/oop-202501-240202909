@@ -1,0 +1,33 @@
+graph TD
+    subgraph Agri-POS System
+        A1[Kasir] --> B1[Login]
+        A1 --> B2[Logout]
+        A1 --> B3[Manage Transaction]
+        A1 --> B4[Print Receipt]
+        
+        A2[Admin] --> B1
+        A2 --> B2
+        A2 --> B5[Manage Product]
+        A2 --> B6[View Sales Report]
+        
+        B3 --> C1[Add Products to Cart]
+        B3 --> C2[Calculate Total]
+        B3 --> C3[Process Payment]
+        
+        B5 --> C4[Add Product]
+        B5 --> C5[Update Product]
+        B5 --> C6[Delete Product]
+        B5 --> C7[View Products]
+        
+        C3 --> D1[Cash Payment]
+        C3 --> D2[E-Wallet Payment]
+        C3 --> D3[Validate Payment]
+        
+        D3 --> E1[Payment Gateway]
+    end
+    
+    style A1 fill:#e1f5fe
+    style A2 fill:#f3e5f5
+    style B3 fill:#c8e6c9
+    style B5 fill:#fff3e0
+    style C3 fill:#ffebee

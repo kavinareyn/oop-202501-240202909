@@ -1,0 +1,38 @@
+---
+title: Agri-POS Checkout Activity Diagram
+---
+flowchart TD
+    subgraph "Swimlane: Kasir"
+        A[Start Transaction] --> B[Scan/Tambah Produk]
+        B --> C{Ada produk lagi?}
+        C -->|Ya| B
+        C -->|Tidak| D[Minta proses pembayaran]
+        I[Tampilkan error stok] --> B
+        K[Tampilkan error saldo] --> D
+        M[Cetak Struk] --> N[Transaksi Selesai]
+    end
+    
+    subgraph "Swimlane: Sistem"
+        E[Validasi Stok] --> F{Stok cukup?}
+        F -->|Ya| G[Hitung Total]
+        F -->|Tidak| H[Set error: Stok habis]
+        G --> J[Proses Pembayaran]
+        J --> L{Berhasil?}
+        L -->|Ya| O[Generate Receipt]
+        L -->|Tidak| P[Set error: Pembayaran gagal]
+    end
+    
+    subgraph "Swimlane: Payment Gateway"
+        Q[Validate Payment] --> R{Valid?}
+        R -->|Ya| S[Process Transaction]
+        R -->|Tidak| T[Return Error]
+    end
+    
+    %% Connections
+    D --> J
+    H --> I
+    P --> K
+    O --> M
+    J --> Q
+    S --> L
+    T --> P
