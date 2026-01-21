@@ -1,4 +1,4 @@
-<img width="1867" height="927" alt="image" src="https://github.com/user-attachments/assets/1191b55b-ca69-4850-8c7f-9336055b92dc" />#Laporan Praktikum Minggu 5
+#Laporan Praktikum Minggu 5
 Topik: Abstraction (Abstract Class & Interface)
 
 ## Identitas
@@ -175,22 +175,25 @@ public class MainAbstraction {
 
 ## Analisis
 
-Program ini berhasil menerapkan abstraction dan interface dalam Java untuk membangun sistem pembayaran yang fleksibel. Dengan memisahkan kontrak, logika umum, dan implementasi spesifik, sistem menjadi mudah dikembangkan dan dipelihara.
+Program ini menerapkan konsep abstraction menggunakan abstract class dan interface pada Java. Abstract class Pembayaran digunakan sebagai kerangka dasar untuk semua metode pembayaran karena memiliki atribut dan perilaku umum, sedangkan interface Validatable dan Receiptable digunakan untuk mendefinisikan kemampuan tambahan seperti validasi dan pencetakan struk. Implementasi pada kelas Cash dan EWallet menunjukkan penerapan polimorfisme dan multiple inheritance melalui interface, sehingga sistem menjadi fleksibel, terstruktur, dan mudah dikembangkan.
 ---
 
 ## Kesimpulan
-Program ini menerapkan konsep abstraction, interface, dan polymorphism pada Java untuk membangun sistem pembayaran sederhana. Abstract class Pembayaran menjadi dasar umum, sedangkan Cash dan EWallet mengimplementasikan proses pembayaran sesuai karakteristik masing-masing. Struktur program yang modular membuat sistem mudah dikembangkan dan dipelihara.
+Program ini menunjukkan penerapan abstraction menggunakan abstract class dan interface dalam Java untuk membangun sistem pembayaran yang terstruktur. Abstract class Pembayaran menangani perilaku umum, sedangkan interface digunakan untuk menambahkan kemampuan khusus seperti validasi dan pencetakan struk. Pendekatan ini membuat sistem lebih fleksibel, mudah dikembangkan, dan mudah dipelihara.
 ---
 
 ## Quiz
-1. Perbedaan aggregation dan composition? 
-   **Jawaban:**  Aggregation -> hubungan lemah (weak has-a). Objek bisa berdiri sendiri tanpa objek induknya. Composition hubungan kuat (strong has-a) objek bagian tidak bisa hidup tanpa objek induk.
+1. Jelaskan perbedaan konsep dan penggunaan abstract class dan interface
 
-2. Bagaimana prinsip Open/Closed membantu pengembangan sistem?
-   **Jawaban:** Prinsip Open/Closed membantu pengembangan sistem dengan cara membuat sistem terbuka untuk penambahan fitur, tetapi tertutup untuk perubahan kode lama.
-Artinya, fitur baru bisa ditambahkan (misalnya metode pembayaran baru) tanpa mengubah kode yang sudah ada, sehingga sistem lebih aman, fleksibel, dan mudah dikembangkan.
+Jawaban:
+Abstract class digunakan untuk kelas dasar yang memiliki atribut dan perilaku umum, sedangkan interface digunakan untuk mendefinisikan kontrak atau kemampuan yang harus dimiliki oleh suatu kelas tanpa terikat hierarki.
 
-3. Mengapa Dependency Inversion Principle meningkatkan testability? 
-   **Jawaban:** Dependency Inversion Principle (DIP) meningkatkan testability karena kelas bergantung pada abstraksi (interface/abstract class), bukan pada implementasi konkret.
+2. Mengapa multiple inheritance lebih aman dilakukan dengan interface pada Java?
 
-Akibatnya, saat pengujian kita bisa mengganti dependensi asli dengan mock atau dummy object, sehingga pengujian menjadi lebih mudah, terisolasi, dan tidak bergantung pada sistem nyata (seperti database atau API).
+Jawaban:
+Karena interface tidak memiliki state dan implementasi kompleks, sehingga menghindari konflik dan ambiguitas yang dapat terjadi pada multiple inheritance class.
+
+3. Pada contoh Agri-POS, bagian mana yang paling tepat menjadi abstract class dan interface? Jelaskan alasannya.
+
+Jawaban:
+Pembayaran paling tepat menjadi abstract class karena menyimpan data dan logika umum, sedangkan Validatable dan Receiptable tepat menjadi interface karena merepresentasikan kemampuan tambahan yang dapat dimiliki oleh berbagai metode pembayaran.
