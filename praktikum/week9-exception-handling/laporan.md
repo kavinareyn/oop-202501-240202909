@@ -1,45 +1,179 @@
-# Laporan Praktikum Minggu 1 (sesuaikan minggu ke berapa?)
-Topik: [Tuliskan judul topik, misalnya "Class dan Object"]
+# Laporan Praktikum Minggu 9
+Topik: Exception Handling, Custom Exception, dan Penerapan Design Pattern
 
 ## Identitas
-- Nama  : [Nama Mahasiswa]
-- NIM   : [NIM Mahasiswa]
-- Kelas : [Kelas]
+- Nama  : Kavina Reyna Riyadi
+- NIM   : 240202909
+- Kelas : 3IKKA
 
 ---
 
 ## Tujuan
-(Tuliskan tujuan praktikum minggu ini.  
-Contoh: *Mahasiswa memahami konsep class dan object serta dapat membuat class Produk dengan enkapsulasi.*)
+Mahasiswa mampu:
+
+Menjelaskan perbedaan antara error dan exception.
+Mengimplementasikan try–catch–finally dengan tepat.
+Membuat custom exception sesuai kebutuhan program.
+Mengintegrasikan exception handling ke dalam aplikasi sederhana (kasus keranjang belanja).
+(Opsional) Menerapkan design pattern sederhana (Singleton/MVC) dan unit testing dasar.
 
 ---
 
 ## Dasar Teori
-(Tuliskan ringkasan teori singkat (3–5 poin) yang mendasari praktikum.  
-Contoh:  
-1. Class adalah blueprint dari objek.  
-2. Object adalah instansiasi dari class.  
-3. Enkapsulasi digunakan untuk menyembunyikan data.)
+1. Error vs Exception
+Error → kondisi fatal, tidak dapat ditangani (contoh: OutOfMemoryError).
+Exception → kondisi tidak normal yang dapat ditangani oleh program.
+2. Struktur try–catch–finally
+try {
+    // kode yang berpotensi menimbulkan kesalahan
+} catch (Exception e) {
+    // penanganan
+} finally {
+    // blok yang selalu dijalankan
+}
+3. Membuat Custom Exception
+package com.upb.agripos;
+
+public class InvalidQuantityException extends Exception {
+    public InvalidQuantityException(String message) {
+        super(message);
+    }
+}
+Studi Kasus Agri-POS: Keranjang Belanja
+Keranjang belanja harus memvalidasi:
+
+Jumlah pembelian > 0
+Produk ada dalam keranjang
+Stok mencukupi
+Kesalahan–kesalahan tersebut ditangani menggunakan custom exception.
+
+
 
 ---
 
 ## Langkah Praktikum
-(Tuliskan Langkah-langkah dalam prakrikum, contoh:
-1. Langkah-langkah yang dilakukan (setup, coding, run).  
-2. File/kode yang dibuat.  
-3. Commit message yang digunakan.)
-
+1. Membuat Custom Exception
+2. Model Product dengan Stok
+3. Implementasi ShoppingCart dengan Exception Handling
+4. Main Program untuk Menguji Exception Handling
 ---
 
 ## Kode Program
-(Tuliskan kode utama yang dibuat, contoh:  
+''insufficientStockException
+package com.upb.agripos;
 
-```java
-// Contoh
-Produk p1 = new Produk("BNH-001", "Benih Padi", 25000, 100);
-System.out.println(p1.getNama());
-```
-)
+public class InsufficientStockException extends Exception {
+    public InsufficientStockException(String msg) { super(msg); }
+}
+
+InvalidQuantityException
+package com.upb.agripos;
+
+public class InvalidQuantityException extends Exception {
+    public InvalidQuantityException(String msg) { super(msg); }
+}
+MainEXceptionDemo
+package com.upb.agripos;
+
+public class MainExceptionDemo {
+    public static void main(String[] args) {
+        System.out.println("Hello, I am Kavina Reyna Riyadi-240202909 (Week9)");
+
+        com.upb.agripos.ShoppingCart cart = new com.upb.agripos.ShoppingCart();
+        com.upb.agripos.Product p1 = new com.upb.agripos.Product("P01", "Pupuk Organik", 25000, 3);
+
+        try {
+            cart.addProduct(p1, -1);
+        } catch (com.upb.agripos.InvalidQuantityException e) {
+            System.out.println("Kesalahan: " + e.getMessage());
+        }
+
+        try {
+            cart.removeProduct(p1);
+        } catch (com.upb.agripos.ProductNotFoundException e) {
+            System.out.println("Kesalahan: " + e.getMessage());
+        }
+
+        try {
+            cart.addProduct(p1, 5);
+            cart.checkout();
+        } catch (Exception e) {
+            System.out.println("Kesalahan: " + e.getMessage());
+        }
+    }
+}
+
+Product
+package com.upb.agripos;
+
+public class Product {
+    private final String code;
+    private final String name;
+    private final double price;
+    private int stock;
+
+    public Product(String code, String name, double price, int stock) {
+        this.code = code;
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    public String getCode() { return code; }
+    public String getName() { return name; }
+    public double getPrice() { return price; }
+    public int getStock() { return stock; }
+    public void reduceStock(int qty) { this.stock -= qty; }
+}
+
+ProductNotFoundException
+package com.upb.agripos;
+
+public class ProductNotFoundException extends Exception {
+    public ProductNotFoundException(String msg) { super(msg); }
+}
+
+shoppingcart
+package com.upb.agripos;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class ShoppingCart {
+    private final Map<com.upb.agripos.Product, Integer> items = new HashMap<>();
+
+    public void addProduct(com.upb.agripos.Product p, int qty) throws com.upb.agripos.InvalidQuantityException {
+        if (qty <= 0) {
+            throw new com.upb.agripos.InvalidQuantityException("Quantity harus lebih dari 0.");
+        }
+        items.put(p, items.getOrDefault(p, 0) + qty);
+    }
+
+    public void removeProduct(com.upb.agripos.Product p) throws com.upb.agripos.ProductNotFoundException {
+        if (!items.containsKey(p)) {
+            throw new com.upb.agripos.ProductNotFoundException("Produk tidak ada dalam keranjang.");
+        }
+        items.remove(p);
+    }
+
+    public void checkout() throws com.upb.agripos.InsufficientStockException {
+        for (Map.Entry<com.upb.agripos.Product, Integer> entry : items.entrySet()) {
+            com.upb.agripos.Product product = entry.getKey();
+            int qty = entry.getValue();
+            if (product.getStock() < qty) {
+                throw new com.upb.agripos.InsufficientStockException(
+                        "Stok tidak cukup untuk: " + product.getName()
+                );
+            }
+        }
+        // contoh pengurangan stok bila semua cukup
+        for (Map.Entry<com.upb.agripos.Product, Integer> entry : items.entrySet()) {
+            entry.getKey().reduceStock(entry.getValue());
+        }
+    }
+}
+
+
 ---
 
 ## Hasil Eksekusi
